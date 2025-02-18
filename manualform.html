@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Expenditure Analysis Form</title>
+    <link rel="stylesheet" href="./manualform.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Health Expenditure Analysis Form</h2>
+        <form id="customForm">
+            
+            <!-- Step 1: Personal Details -->
+            <div class="form-step">
+                <h3>Step 1: Personal Details</h3>
+                
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <button type="button" class="next-btn">Next</button>
+            </div>
+
+            <!-- Step 2: Family & Medical History -->
+            <div class="form-step">
+                <h3>Step 2: Family & Medical History</h3>
+
+                <label for="family-history">Family History:</label>
+                <select id="family-history" name="family_history">
+                    <option value="">Select</option>
+                    <option value="None">No genetic illnesses</option>
+                    <option value="Diabetes">Diabetes</option>
+                    <option value="Heart disease">Heart disease</option>
+                </select>
+                <label>Health History</label><br>
+
+                <label><input type="checkbox" name="health_history" value="None"> No genetic illnesses</label><br>
+                <label><input type="checkbox" name="health_history" value="Diabetes"> Diabetes</label><br>
+                <label><input type="checkbox" name="health_history" value="Heart disease"> Heart disease</label><br>
+                <label><input type="checkbox" name="health_history" value="Other"> Other Health illness</label><br>
+                
+                <button type="button" onclick="getSelectedHealthHistory()">Submit</button>
+                
+                <p>Selected Health History: <span id="output"></span></p>
+                
+                <script>
+                  function getSelectedHealthHistory() {
+                    let selected = [];
+                    document.querySelectorAll('input[name="health_history"]:checked').forEach((checkbox) => {
+                      selected.push(checkbox.value);
+                    });
+                    document.getElementById("output").textContent = selected.join(", ");
+                  }
+                </script>
+                
+                <button type="button" class="prev-btn">Previous</button>
+                <button type="button" class="next-btn">Next</button>
+            </div>
+
+            <!-- Step 3: Lifestyle -->
+            <div class="form-step">
+                <h3>Step 3: Lifestyle</h3>
+
+                <label for="diet">Diet:</label>
+                <select id="diet" name="diet" required>
+                    <option value="">Select</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Non-Vegetarian">Non-Vegetarian</option>
+                    <option value="both">Both</option>
+                </select>
+                <label for="exercise">Exercise</label>
+                <select id="exercise" name="exercise" required>
+                    <option value="">Select</option>
+                    <option value="NO">No Exercise</option>
+                    <option value="Medium">Medium Exercise</option>
+                    <option value="Athletic">Athletic</option>
+                    
+                </select>
+                <button type="button" class="prev-btn">Previous</button>
+                <button type="button" class="next-btn">Next</button>
+
+                
+            </div>
+            <!-- Step 4: Health-Related Expenses -->
+            <div class="form-step">
+                <h3>Step 4: Health-Related Expenses</h3>
+
+                <div id="illness-forms">
+                    <div class="illness-form">
+                        <label for="illness-name">Health Illness Name:</label>
+                        <input type="text" name="illness_name[]" required>
+
+                        <label for="illness-period">Illness Period:</label>
+                        <input type="date" name="illness_start[]" required> to 
+                        <input type="date" name="illness_end[]" required>
+
+                        <label for="expenditure">Expenditure on This Illness:</label>
+                        <input type="number" name="expenditure[]" required>
+
+                        <label for="bills">Upload Authorized Bills (if available):</label>
+                        <input type="file" name="bills[]">
+                    </div>
+                </div>
+
+                <button type="button" id="add-more">Add More</button>
+
+                <button type="button" class="prev-btn">Previous</button>
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="./manualform.js"></script>
+</body>
+</html>
